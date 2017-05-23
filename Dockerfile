@@ -7,7 +7,7 @@ RUN echo "debconf debconf/frontend select Teletype" | debconf-set-selections &&\
     apt-get update &&\
 
 # Basic dev tools
-    apt-get install -y sudo openssh-client git build-essential vim ctags man curl direnv software-properties-common
+    apt-get install -y sudo openssh-client git build-essential vim ctags man curl direnv software-properties-common locales
 
 # Install Homesick, through which dotfiles configurations will be installed
 RUN apt-get install -y ruby &&\
@@ -23,14 +23,13 @@ RUN apt-get install -y openssh-server &&\
     mkdir /var/run/sshd &&\
     echo "AllowAgentForwarding yes" >> /etc/ssh/sshd_config
 
+# Setting locale
+RUN locale-gen es_ES.UTF-8
+
 # Install tmux
 RUN apt-get install -y libevent-dev libncurses-dev
 RUN cd /tmp && wget https://github.com/tmux/tmux/releases/download/2.4/tmux-2.4.tar.gz 
 RUN cd /tmp && tar -zxvf /tmp/tmux-2.4.tar.gz && cd /tmp/tmux-2.4 && ./configure && make && make install
-#RUN ./configure && make
-#RUN make install 
-
-#RUN apt-get install -y tmux
 
 RUN useradd dev -d /home/dev -m -s /bin/bash &&\
     adduser dev sudo && \
@@ -40,10 +39,10 @@ COPY ssh_key_adder.rb /home/dev/ssh_key_adder.rb
 RUN chown dev:dev /home/dev/ssh_key_adder.rb &&\
     chmod +x /home/dev/ssh_key_adder.rb
 
-
 USER dev
 WORKDIR /home/dev
 
+ENV a 1
 RUN \
 # Set up The Editor of the Gods
     homesick clone https://github.com/eLafo/vim-dot-files.git &&\
