@@ -24,7 +24,7 @@ RUN apt-get install -y openssh-server &&\
     echo "AllowAgentForwarding yes" >> /etc/ssh/sshd_config
 
 # Setting locale
-RUN locale-gen es_ES.UTF-8
+RUN locale-gen es_ES.UTF-8 en_US.UTF-8
 
 # Install tmux
 RUN apt-get install -y libevent-dev libncurses-dev
@@ -42,7 +42,6 @@ RUN chown dev:dev /home/dev/ssh_key_adder.rb &&\
 USER dev
 WORKDIR /home/dev
 
-ENV a 1
 RUN \
 # Set up The Editor of the Gods
     homesick clone https://github.com/eLafo/vim-dot-files.git &&\
