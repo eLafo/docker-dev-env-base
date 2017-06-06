@@ -26,6 +26,9 @@ RUN apt-get install -y openssh-server &&\
 # Setting locale
 RUN locale-gen es_ES.UTF-8 en_US.UTF-8
 
+# Config TERM
+ENV TERM=xterm-256color
+
 # Install tmux
 RUN apt-get install -y libevent-dev libncurses-dev
 RUN cd /tmp && wget https://github.com/tmux/tmux/releases/download/2.4/tmux-2.4.tar.gz 
