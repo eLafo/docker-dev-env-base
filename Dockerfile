@@ -51,6 +51,10 @@ RUN \
     homesick symlink vim-dot-files &&\
     exec vim --not-a-term -c ":PluginInstall" -c "qall"
 
+RUN \
+    homesick clone eLafo/git-dot-files &&\
+    homesick symlink git-dot-files
+
 # Expose SSH
 EXPOSE 22
 
