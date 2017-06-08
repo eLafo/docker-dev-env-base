@@ -7,7 +7,7 @@ RUN echo "debconf debconf/frontend select Teletype" | debconf-set-selections &&\
     apt-get update &&\
 
 # Basic dev tools
-    apt-get install -y sudo openssh-client git build-essential vim ctags man curl direnv software-properties-common locales bash-completion
+    apt-get install -y sudo openssh-client git build-essential vim ctags man curl direnv software-properties-common locales bash-completion silversearcher-ag
 
 # Install Homesick, through which dotfiles configurations will be installed
 RUN apt-get install -y ruby &&\
