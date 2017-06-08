@@ -25,6 +25,8 @@ RUN apt-get install -y openssh-server &&\
 
 # Setting locale
 RUN locale-gen es_ES.UTF-8 en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
+ENV LANG=en_US.UTF-8
 
 # Config TERM
 ENV TERM=xterm-256color
@@ -62,6 +64,7 @@ RUN \
 # Expose SSH
 EXPOSE 22
 
+VOLUME /home/dev/app
 # Install the SSH keys of ENV-configured GitHub users before running the SSH
 # server process. See README for SSH instructions.
 CMD /home/dev/ssh_key_adder.rb && sudo /usr/sbin/sshd -D
