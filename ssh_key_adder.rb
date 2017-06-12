@@ -3,7 +3,6 @@
 ENV_KEY = "AUTHORIZED_GH_USERS"
 
 begin
-  `mkdir /home/dev/.ssh`
   `touch /home/dev/.ssh/authorized_keys`
   ENV[ENV_KEY].split(",").map(&:strip).each do |username|
     output = `gh-auth add --users=#{username}`

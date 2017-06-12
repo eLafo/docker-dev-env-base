@@ -52,6 +52,7 @@ RUN chown dev:dev /home/dev/ssh_key_adder.rb &&\
 
 USER dev
 WORKDIR /home/dev
+RUN mkdir /home/dev/.ssh
 
 RUN \
 # Set up The Editor of the Gods
