@@ -68,6 +68,10 @@ RUN \
     homesick clone eLafo/bash-dot-files &&\
     homesick symlink --force=true bash-dot-files
 
+RUN \
+    homesick clone eLafo/tmux-dot-files &&\
+    homesick symlink --force=true tmux-dot-files
+
 # Expose SSH
 EXPOSE 22
 
