@@ -36,6 +36,12 @@ RUN apt-get install -y libevent-dev libncurses-dev
 RUN cd /tmp && wget https://github.com/tmux/tmux/releases/download/2.4/tmux-2.4.tar.gz 
 RUN cd /tmp && tar -zxvf /tmp/tmux-2.4.tar.gz && cd /tmp/tmux-2.4 && ./configure && make && make install
 
+# Install wemux
+RUN git clone git://github.com/zolrath/wemux.git /usr/local/share/wemux &&\
+    ln -s /usr/local/share/wemux/wemux /usr/local/bin/wemux &&\
+    cp /usr/local/share/wemux/wemux.conf.example /usr/local/etc/wemux.conf &&\
+    echo "host_list=(dev)" >> /usr/local/etc/wemux.conf
+
 RUN useradd dev -d /home/dev -m -s /bin/bash &&\
     adduser dev sudo && \
     echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
