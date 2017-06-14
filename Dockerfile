@@ -46,9 +46,12 @@ RUN useradd dev -d /home/dev -m -s /bin/bash &&\
     adduser dev sudo && \
     echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-COPY ssh_key_adder.rb /home/dev/ssh_key_adder.rb
+COPY ssh_key_adder.rb /home/dev/ssh_key_adder.rb 
+COPY ssh_start.sh /home/dev/ssh_start.sh
+
 RUN chown dev:dev /home/dev/ssh_key_adder.rb &&\
-    chmod +x /home/dev/ssh_key_adder.rb
+    chmod +x /home/dev/ssh_key_adder.rb &&\
+    chmod +x /home/dev/ssh_start.sh
 
 USER dev
 WORKDIR /home/dev
@@ -78,4 +81,4 @@ EXPOSE 22
 VOLUME /home/dev/app
 # Install the SSH keys of ENV-configured GitHub users before running the SSH
 # server process. See README for SSH instructions.
-CMD /home/dev/ssh_key_adder.rb && sudo /usr/sbin/sshd -D
+CMD /home/dev/ssh_start.sh
