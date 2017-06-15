@@ -21,7 +21,8 @@ RUN gem install github-auth --no-rdoc --no-ri
 # from the container happen magically.
 RUN apt-get install -y openssh-server &&\
     mkdir /var/run/sshd &&\
-    echo "AllowAgentForwarding yes" >> /etc/ssh/sshd_config
+    echo "AllowAgentForwarding yes" >> /etc/ssh/sshd_config &&\
+    echo "PermitUserEnvironment yes" >> /etc/ssh/sshd_config
 
 # Setting locale
 RUN locale-gen es_ES.UTF-8 en_US.UTF-8
@@ -51,7 +52,7 @@ COPY ssh_start.sh /home/dev/ssh_start.sh
 
 RUN chown dev:dev /home/dev/ssh_key_adder.rb &&\
     chmod +x /home/dev/ssh_key_adder.rb &&\
-    chmod +x /home/dev/ssh_start.sh
+    chmod +x /home/dev/ssh_start.sh 
 
 USER dev
 WORKDIR /home/dev
